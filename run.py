@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 import logging
+import os
 
 # internal imports
 from dataModels.datbaseSetup import init_db
@@ -129,7 +130,7 @@ if __name__ == '__main__':
             logging.error("Database initialization failed.")
             exit(1)
         logging.info("Database initialized successfully.")
-        
-        app.run(debug=True, host='0.0.0.0', port=5000) 
+        port = int(os.environ.get("PORT", 5000))
+        app.run(debug=True, host='0.0.0.0', port=port) 
     except Exception as e:
         logging.error(f"An error occurred during startup: {e}")
